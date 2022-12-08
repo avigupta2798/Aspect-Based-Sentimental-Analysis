@@ -1,9 +1,10 @@
 from data_loader import  *
-
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 from os import path
 from PIL import Image
+from model import *
+import seaborn as sns
 
 plt.hist(df_training.sentiment, bins = 3, align= 'mid')
 plt.xticks(range(3), ['Negative','Neutral', 'Positive'])
@@ -44,3 +45,13 @@ plt.axis("off")
 plt.margins(x=0, y=0)
 plt.show()
 
+sns.pointplot(x='Model', y='scores_cvec', data =mod_score, label = 'cvec')
+sns.pointplot(x='Model', y='scores_tvec', color='r' ,data =mod_score, label = 'tvec')
+
+
+plt.ylabel('Accuracy Score', fontsize=10)
+plt.xlabel('Models', fontsize=2)
+plt.xticks(rotation=30)
+plt.title('Accuracy Scores of Different Models')
+# plt.legend(loc='upper left')
+plt.show()
