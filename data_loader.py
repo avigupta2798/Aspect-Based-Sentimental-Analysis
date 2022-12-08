@@ -1,10 +1,11 @@
 import pandas as pd
 import numpy as np
-import re
 import xml.etree.ElementTree as ET
 import time
 #import pattern
 import warnings
+from sklearn.model_selection import train_test_split
+
 warnings.filterwarnings("ignore")
 from tqdm import tqdm_notebook as tqdm
 import nltk
@@ -102,8 +103,6 @@ df_training = df_training.drop([475, 648, 720])
 df_training = df_training.reset_index(drop=True)
 
 
-from sklearn.model_selection import train_test_split
-
 train, test = train_test_split(df_training, test_size=0.3, random_state=1)
 
 t_1 = train[train['sentiment']==1].sample(800,replace=True)
@@ -118,4 +117,3 @@ training_bs = training_bs.reset_index(drop=True)
 training_bs.to_csv('training_bs.csv', header=True, index=False, encoding='UTF8')
 test = test.reset_index(drop=True)
 test.to_csv('testing.csv', header=True, index=False, encoding='UTF8')
-
